@@ -1,0 +1,110 @@
+/* style.css — оформление Photo Codec */
+
+:root {
+  --bg: #0f1420;
+  --card: #1a2233;
+  --accent: #4da3ff;
+  --text: #e8edf5;
+  --muted: #9aa7bd;
+  --border: #2a3650;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+}
+
+header {
+  text-align: center;
+  padding: 2rem 1rem 1rem;
+}
+
+h1 { margin: 0 0 .3rem; font-size: 1.9rem; }
+.subtitle { color: var(--muted); max-width: 720px; margin: 0 auto; }
+
+main {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.2rem 1.5rem;
+}
+
+/* Drop zone */
+#drop-zone {
+  border: 2px dashed var(--border);
+  text-align: center;
+  transition: border-color .2s, background .2s;
+}
+#drop-zone.drag {
+  border-color: var(--accent);
+  background: rgba(77, 163, 255, .07);
+}
+.drop-inner p { margin-bottom: .6rem; }
+
+.btn {
+  display: inline-block;
+  background: #24304a;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: .55rem 1.1rem;
+  font-size: .95rem;
+  cursor: pointer;
+  transition: background .15s;
+}
+.btn:hover:not(:disabled) { background: #2e3d5e; }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: #08121f; font-weight: 600; }
+.btn.primary:hover { background: #6fb4ff; }
+
+/* Controls */
+.control-row { margin-bottom: .9rem; }
+.control-row label { display: block; color: var(--muted); margin-bottom: .35rem; }
+.checkbox-row label { display: flex; align-items: center; gap: .5rem; color: var(--text); }
+input[type="range"] { width: 100%; accent-color: var(--accent); }
+.buttons { display: flex; gap: .6rem; flex-wrap: wrap; }
+
+/* Compare panes */
+.compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+@media (max-width: 720px) { .compare { grid-template-columns: 1fr; } }
+.pane img {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  display: block;
+}
+.stats { list-style: none; padding: 0; margin: .6rem 0 0; color: var(--muted); font-size: .9rem; }
+
+/* Metrics table */
+table { width: 100%; border-collapse: collapse; font-size: .92rem; }
+th, td { text-align: left; padding: .5rem .7rem; border-bottom: 1px solid var(--border); }
+th { color: var(--muted); font-weight: 600; }
+.hint { color: var(--muted); font-size: .88rem; }
+
+/* Pipeline log */
+#pipeline-log li { margin-bottom: .35rem; color: var(--muted); }
+
+footer {
+  text-align: center;
+  color: var(--muted);
+  font-size: .82rem;
+  padding: 1.5rem 1rem 2rem;
+}

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Photo Codec — прототип кодека сжатия фото</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>📷 Photo Codec (прототип)</h1>
+    <p class="subtitle">Сжатие с минимальными потерями прямо в браузере: JPEG (настраиваемое качество) + LZ-сжатие (CompressionStream). Ничего не загружается на сервер.</p>
+  </header>
+
+  <main>
+    <!-- Зона загрузки -->
+    <section id="drop-zone" class="card">
+      <div class="drop-inner">
+        <p><strong>Перетащите фото сюда</strong> или</p>
+        <label class="btn file-btn">
+          Выбрать файл
+          <input type="file" id="file-input" accept="image/*" hidden />
+        </label>
+      </div>
+    </section>
+
+    <!-- Управление -->
+    <section class="card controls" id="controls" hidden>
+      <div class="control-row">
+        <label for="quality">Качество JPEG: <span id="quality-value">92</span>%</label>
+        <input type="range" id="quality" min="50" max="100" value="92" step="1" />
+      </div>
+      <div class="control-row checkbox-row">
+        <label><input type="checkbox" id="use-lz" checked /> Дополнительно сжать потоком LZ (CompressionStream gzip)</label>
+      </div>
+      <div class="control-row buttons">
+        <button id="encode-btn" class="btn primary">⬇ Сжать (encode)</button>
+        <button id="decode-btn" class="btn" disabled>⬆ Восстановить (decode)</button>
+        <button id="download-bin" class="btn" disabled>💾 Сохранить .pck</button>
+      </div>
+    </section>
+
+    <!-- Результаты -->
+    <section class="results" id="results" hidden>
+      <div class="card compare">
+        <div class="pane">
+          <h3>Оригинал</h3>
+          <img id="orig-img" alt="Оригинал" />
+          <ul class="stats" id="orig-stats"></ul>
+        </div>
+        <div class="pane">
+          <h3>Восстановленное из контейнера</h3>
+          <img id="dec-img" alt="Восстановленное" />
+          <ul class="stats" id="dec-stats"></ul>
+        </div>
+      </div>
+
+      <div class="card metrics">
+        <h3>Метрики качества</h3>
+        <table id="metrics-table">
+          <thead>
+            <tr><th>Показатель</th><th>Значение</th><th>Комментарий</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <p class="hint" id="psnr-hint"></p>
+      </div>
+
+      <div class="card pipeline">
+        <h3>Пайплайн</h3>
+        <ol id="pipeline-log"></ol>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Учебный прототип. Формат контейнера .pck описан в codec.js (магическая сигнатура PCK1).</p>
+  </footer>
+
+  <script src="codec.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
