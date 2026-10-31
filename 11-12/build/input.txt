@@ -1,0 +1,6 @@
+apple
+apple
+banana
+banana
+cherry
+apple
